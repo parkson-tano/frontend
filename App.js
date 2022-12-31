@@ -1,20 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from "react";
+import { Button, View, Text } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import RegisterStack from "./src/components/navigation/RegisterStack";
+import { AppRegistry } from "react-native";
+import Service from "./src/components/auth/Services";
+import { AuthProvider } from "./src/components/context/AuthContext";
+import { AxiosProvider } from "./src/components/context/AxiosContext";
+// function DetailsScreen({ navigation }) {
+//   return (
+//     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+//       <Text>Details Screen</Text>
+//       <Button
+//         title="Go to Details... again"
+//         onPress={() => navigation.navigate("Details")}
+//       />
+//     </View>
+//   );
+// }
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthProvider>
+      <AxiosProvider>
+    <Service />
+        </AxiosProvider>
+    </AuthProvider>
+    // <NavigationContainer initialRouteName="Register">
+    //   <RegisterStack />
+    // </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
